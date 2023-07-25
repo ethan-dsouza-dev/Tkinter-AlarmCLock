@@ -7,7 +7,8 @@ def alarm(set_alarm_time):
     alarm_rang = False
     current_time = datetime.datetime.now()
     now = current_time.strftime("%H:%M:%S")
-    ring_time = str(int)
+    ring_time = 60
+    
     while not alarm_rang:
         time.sleep(1)
         current_time = datetime.datetime.now()
@@ -19,7 +20,10 @@ def alarm(set_alarm_time):
         if now == set_alarm_time or set_alarm_time < now:
             print("Time to Wake Up!")
             alarm_rang = True
-            winsound.PlaySound("sound.wav", winsound.SND_ASYNC)
+            while ring_time > 0:
+                winsound.PlaySound("alert.wav", winsound.SND_ASYNC)
+                time.sleep(1)
+                ring_time -= 1
 
 def get_time():
     set_alarm_time = f"{hour.get()}:{min.get()}:00"
